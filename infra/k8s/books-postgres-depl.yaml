@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-books-postgres-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-books-postgres
+  template:
+    metadata:
+      labels:
+        app: library-books-postgres
+    spec:
+      containers:
+        - name: library-books-postgres
+          image: postgres
+          env:
+            - name: POSTGRES_DB
+              value: books-db
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: password
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-books-postgres-srv
+spec:
+  selector:
+    app: library-books-postgres
+  ports:
+    - name: db
+      protocol: TCP
+      port: 5432
+      targetPort: 5432

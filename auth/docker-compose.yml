@@ -1,0 +1,37 @@
+services:
+  auth-web:
+    container_name: auth-web
+    build:
+      dockerfile: /Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - auth-db
+    environment:
+      DB_HOST: auth-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_DATABASE: expressdb
+      DB_DIALECT: postgres
+      ACCESS_TOKEN_KEY: MyAccessTokenKey
+      ACCESS_TOKEN_DURATION: 1h
+      REFRESH_TOKEN_KEY: MyRefreshTokenKey
+      REFRESH_TOKEN_DURATION: 60d
+      CONFIRMATION_TOKEN_KEY: MyConfirmationTokenKey
+      CONFIRMATION_TOKEN_DURATION: 10d
+
+  auth-db:
+    container_name: auth-db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: expressdb
+    volumes:
+      - postgres-data-express:/var/lib/postgresql/data
+
+volumes:
+  postgres-data-express:

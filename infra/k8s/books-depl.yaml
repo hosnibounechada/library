@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-books-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-books
+  template:
+    metadata:
+      labels:
+        app: library-books
+    spec:
+      containers:
+        - name: library-books
+          image: hosnibounechada/library-books
+          env:
+            - name: DB_HOST
+              value: library-books-postgres-srv
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              value: password
+            - name: DB_DATABASE
+              value: books-db
+            - name: DB_DIALECT
+              value: postgres
+            - name: ACCESS_TOKEN_KEY
+              value: MyAccessTokenKey
+            - name: ACCESS_TOKEN_DURATION
+              value: 1h
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-books-srv
+spec:
+  selector:
+    app: library-books
+  ports:
+    - name: library-books
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

@@ -1,0 +1,17 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: library
+build:
+  artifacts:
+    - image: hosnibounechada/library-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+    - image: hosnibounechada/library-books
+      context: books
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - infra/k8s/*
