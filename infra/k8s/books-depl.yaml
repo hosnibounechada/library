@@ -12,6 +12,13 @@ spec:
       labels:
         app: library-books
     spec:
+      initContainers:
+      - name: wait-for-database
+        image: busybox
+        command:
+        - sh
+        - -c
+        - until nc -z library-books-postgres-srv 5432; do sleep 1; done
       containers:
         - name: library-books
           image: hosnibounechada/library-books

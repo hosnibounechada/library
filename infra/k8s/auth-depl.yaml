@@ -12,6 +12,13 @@ spec:
       labels:
         app: library-auth
     spec:
+      initContainers:
+      - name: wait-for-database
+        image: busybox
+        command:
+        - sh
+        - -c
+        - until nc -z library-auth-postgres-srv 5432; do sleep 1; done
       containers:
         - name: library-auth
           image: hosnibounechada/library-auth
