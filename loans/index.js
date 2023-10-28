@@ -14,9 +14,9 @@ const { consumeFromQueue } = require("./src/events/event-consumer");
 async function main() {
   const PORT = process.env.PORT || 3000;
 
-  // await initializeRabbitMQ();
+  await initializeRabbitMQ();
 
-  // consumeFromQueue();
+  consumeFromQueue();
 
   app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
 }
