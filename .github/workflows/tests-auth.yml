@@ -20,6 +20,14 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+      rabbitmq:
+        image: rabbitmq
+        env:
+          RABBITMQ_DEFAULT_USER: rabbitmq
+          RABBITMQ_DEFAULT_PASS: password
+        ports:
+          - 5672:5672
+          - 15672:15672
     steps:
       - uses: actions/checkout@v2
       - run: cd auth && npm install && npm run test:ci
