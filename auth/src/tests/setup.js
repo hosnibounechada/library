@@ -8,18 +8,21 @@ const app = require("../app");
 const { JWTProvider } = require("../services");
 
 const sequelize = require("../config/database");
+const { initializeRabbitMQ, getConnection } = require("../config/rabbitmq");
 
 const emptyUsersTable = async () => {
   await sequelize.query("DELETE FROM users");
 };
 
 beforeAll(async () => {
+  initializeRabbitMQ();
   await sequelize.sync();
 });
 
 afterAll(async () => {
   await emptyUsersTable();
   await sequelize.close();
+  await getConnection().close();
 });
 
 beforeEach(async () => {

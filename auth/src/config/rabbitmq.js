@@ -22,4 +22,5 @@ async function initializeRabbitMQ() {
 module.exports = {
   initializeRabbitMQ,
   getChannel: () => channel,
+  getConnection: () => connection,
 };
