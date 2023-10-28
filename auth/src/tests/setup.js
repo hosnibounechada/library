@@ -9,6 +9,8 @@ const { JWTProvider } = require("../services");
 
 const sequelize = require("../config/database");
 
+jest.mock("../events/publishers/user-events");
+
 const emptyUsersTable = async () => {
   await sequelize.query("DELETE FROM users");
 };
