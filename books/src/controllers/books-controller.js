@@ -3,6 +3,8 @@ const { BadRequestError, NotFoundError } = require("../errors");
 const toCamelCase = require("../utils/to-camel-case");
 const toSnakeCase = require("../utils/to-snake-case");
 
+const { publishCreateBookEvent } = require("../events/publishers/book-events");
+
 const getAll = async (_, res) => {
   const books = await Book.findAll();
 
@@ -29,6 +31,8 @@ const create = async (req, res) => {
   if (bookExists) throw new BadRequestError("ISBN Already Exists!");
 
   const book = (await Book.create(body)).get();
+
+  publishCreateBookEvent(book);
 
   res.status(201).json(toSnakeCase(book));
 };

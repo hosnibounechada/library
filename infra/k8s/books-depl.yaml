@@ -19,6 +19,12 @@ spec:
         - sh
         - -c
         - until nc -z library-books-postgres-srv 5432; do sleep 1; done
+      - name: wait-for-message-broker
+        image: busybox
+        command:
+        - sh
+        - -c
+        - until nc -z library-rabbitmq-srv 5672; do sleep 1; done
       containers:
         - name: library-books
           image: hosnibounechada/library-books
@@ -39,6 +45,8 @@ spec:
               value: MyAccessTokenKey
             - name: ACCESS_TOKEN_DURATION
               value: 1h
+            - name: RABBITMQ_URL
+              value: amqp://rabbitmq:password@library-rabbitmq-srv:5672
           resources:
             limits:
               memory: 512Mi

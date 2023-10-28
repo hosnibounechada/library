@@ -12,6 +12,10 @@ build:
       context: books
       docker:
         dockerfile: Dockerfile
+    - image: hosnibounechada/library-loans
+      context: loans
+      docker:
+        dockerfile: Dockerfile
 manifests:
   rawYaml:
     - infra/k8s/*

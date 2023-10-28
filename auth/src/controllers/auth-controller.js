@@ -8,6 +8,8 @@ const {
 const toCamelCase = require("../utils/to-camel-case");
 const toSnakeCase = require("../utils/to-snake-case");
 
+const { publishCreateUserEvent } = require("../events/publishers/user-events");
+
 const register = async (req, res) => {
   const user = toCamelCase(req.body);
 
@@ -48,6 +50,12 @@ const accountConfirmation = async (req, res) => {
   user.verified = true;
 
   await user.save();
+
+  publishCreateUserEvent({
+    id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+  });
 
   res.status(204).send();
 };

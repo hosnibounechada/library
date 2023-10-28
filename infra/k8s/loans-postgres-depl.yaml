@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-loans-postgres-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-loans-postgres
+  template:
+    metadata:
+      labels:
+        app: library-loans-postgres
+    spec:
+      containers:
+        - name: library-loans-postgres
+          image: postgres
+          env:
+            - name: POSTGRES_DB
+              value: loans-db
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: password
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-loans-postgres-srv
+spec:
+  selector:
+    app: library-loans-postgres
+  ports:
+    - name: db
+      protocol: TCP
+      port: 5432
+      targetPort: 5432

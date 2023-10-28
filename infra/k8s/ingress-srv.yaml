@@ -22,3 +22,10 @@ spec:
                 name: library-books-srv
                 port:
                   number: 3000
+          - path:  /api/v1/loans
+            pathType: Prefix
+            backend:
+              service:
+                name: library-loans-srv
+                port:
+                  number: 3000
