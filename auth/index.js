@@ -4,7 +4,7 @@ require("dotenv").config({
 const app = require("./src/app");
 const umzug = require("./src/config/umzug-migration");
 
-const { initializeRabbitMQ } = require("./src/config/rabbitmq");
+// const { initializeRabbitMQ } = require("./src/config/rabbitmq");
 
 (async () => {
   await umzug.up();
@@ -15,7 +15,7 @@ function main() {
 
   const PORT = process.env.PORT || 3000;
 
-  initializeRabbitMQ();
+  // initializeRabbitMQ();
 
   app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
 }
