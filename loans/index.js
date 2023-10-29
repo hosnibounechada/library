@@ -12,7 +12,7 @@ const { consumeFromQueue } = require("./src/events/event-consumer");
 })();
 
 async function main() {
-  console.log("Starting Service Loans ...");
+  console.log("Starting ...");
 
   const PORT = process.env.PORT || 3000;
 
