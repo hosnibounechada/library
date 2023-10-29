@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: library-ingress-srv
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: lastingdynamicslibrary.xyz
+      http:
+        paths:
+          - path:  /api/v1/auth
+            pathType: Prefix
+            backend:
+              service:
+                name: library-auth-srv
+                port:
+                  number: 3000
+          - path:  /api/v1/books
+            pathType: Prefix
+            backend:
+              service:
+                name: library-books-srv
+                port:
+                  number: 3000
+          - path:  /api/v1/loans
+            pathType: Prefix
+            backend:
+              service:
+                name: library-loans-srv
+                port:
+                  number: 3000
