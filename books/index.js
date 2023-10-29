@@ -11,6 +11,8 @@ const { initializeRabbitMQ } = require("./src/config/rabbitmq");
 })();
 
 function main() {
+  console.log("Starting...");
+
   const PORT = process.env.PORT || 3000;
 
   initializeRabbitMQ();
