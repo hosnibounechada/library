@@ -12,6 +12,8 @@ const { consumeFromQueue } = require("./src/events/event-consumer");
 })();
 
 async function main() {
+  console.log("Starting Service Loans ...");
+
   const PORT = process.env.PORT || 3000;
 
   await initializeRabbitMQ();
