@@ -1,2 +1,7 @@
 node_modules
-.env.test
+auth/.env.test
+books/.env.test
+loans/.env.test
+auth/.env.development
+books/.env.development
+loans/.env.development
