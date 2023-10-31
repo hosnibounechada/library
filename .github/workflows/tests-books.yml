@@ -22,6 +22,19 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+    env:
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE_BOOKS }}
+      DB_DIALECT: ${{ secrets.DB_DIALECT }}
+      ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY }}
+      ACCESS_TOKEN_DURATION: ${{ secrets.ACCESS_TOKEN_DURATION }}
+      REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY }}
+      REFRESH_TOKEN_DURATION: ${{ secrets.REFRESH_TOKEN_DURATION }}
+      CONFIRMATION_TOKEN_KEY: ${{ secrets.CONFIRMATION_TOKEN_KEY }}
+      CONFIRMATION_TOKEN_DURATION: ${{ secrets.CONFIRMATION_TOKEN_DURATION }}
     steps:
       - uses: actions/checkout@v2
       - run: cd books && npm install && npm run test:ci
