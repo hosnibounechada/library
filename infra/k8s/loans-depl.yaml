@@ -33,20 +33,43 @@ spec:
               value: library-loans-postgres-srv
             - name: DB_PORT
               value: '5432'
+            # - name: DB_USER
+            #   value: postgres
+            # - name: DB_PASSWORD
+            #   value: password
             - name: DB_USER
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: library
+                  key: DB_USER
             - name: DB_PASSWORD
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  name: library
+                  key: DB_PASSWORD
             - name: DB_DATABASE
               value: loans-db
             - name: DB_DIALECT
               value: postgres
             - name: ACCESS_TOKEN_KEY
-              value: MyAccessTokenKey
+              valueFrom:
+                secretKeyRef:
+                  name: library
+                  key: ACCESS_TOKEN_KEY
             - name: ACCESS_TOKEN_DURATION
               value: 1h
+            - name: RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: library
+                  key: RABBITMQ_USERNAME
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: library
+                  key: RABBITMQ_PASSWORD
             - name: RABBITMQ_URL
-              value: amqp://rabbitmq:password@library-rabbitmq-srv:5672
+              value: amqp://$(RABBITMQ_USERNAME):$(RABBITMQ_PASSWORD)@library-rabbitmq-srv:5672
           # resources:
           #   limits:
           #     memory: 512Mi
