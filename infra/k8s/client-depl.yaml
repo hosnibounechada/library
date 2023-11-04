@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-client
+  template:
+    metadata:
+      labels:
+        app: library-client
+    spec:
+      containers:
+        - name: library-client
+          image: hosnibounechada/library-client
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-client-srv
+spec:
+  selector:
+    app: library-client
+  ports:
+    - name: library-client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
