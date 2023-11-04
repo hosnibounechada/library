@@ -29,3 +29,10 @@ spec:
                 name: library-loans-srv
                 port:
                   number: 3000
+          - path:  /
+            pathType: Prefix
+            backend:
+              service:
+                name: library-client-srv
+                port:
+                  number: 3000
