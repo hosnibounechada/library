@@ -12,6 +12,10 @@ spec:
       labels:
         app: library-books-postgres
     spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
       containers:
         - name: library-books-postgres
           image: postgres
@@ -28,6 +32,10 @@ spec:
                 secretKeyRef:
                   name: library
                   key: DB_PASSWORD
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+              subPath: postgres/books
           # resources:
           #   limits:
           #     memory: 512Mi

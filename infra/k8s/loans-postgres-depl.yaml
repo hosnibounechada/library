@@ -12,6 +12,10 @@ spec:
       labels:
         app: library-loans-postgres
     spec:
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
       containers:
         - name: library-loans-postgres
           image: postgres
@@ -28,6 +32,10 @@ spec:
                 secretKeyRef:
                   name: library
                   key: DB_PASSWORD
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+              subPath: postgres/loans
           # resources:
           #   limits:
           #     memory: 512Mi
