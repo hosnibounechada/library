@@ -1,4 +1,4 @@
-const CustomError = require("../errors/custom-error");
+const CustomError = require("@hosnibounechada/library-common/errors/custom-error");
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof CustomError) {

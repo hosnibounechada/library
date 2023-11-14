@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
-const { NotAuthorizedError, NotAuthenticatedError } = require("../errors");
+const {
+  NotAuthorizedError,
+} = require("@hosnibounechada/library-common/errors");
 const { tokens } = require("../constants/tokens");
 
 const refreshMiddleware = (req, _, next) => {
