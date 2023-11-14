@@ -1,10 +1,12 @@
 const User = require("../models/user");
 const { PasswordHash, RandomGenerator, JWTProvider } = require("../services");
+
 const {
   BadRequestError,
   InvalidCredentialsError,
   NotFoundError,
-} = require("../errors");
+} = require("@hosnibounechada/library-common/errors");
+
 const toCamelCase = require("../utils/to-camel-case");
 const toSnakeCase = require("../utils/to-snake-case");
 

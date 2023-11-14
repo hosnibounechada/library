@@ -1,5 +1,7 @@
 const { validationResult } = require("express-validator");
-const { RequestValidationError } = require("../errors");
+const {
+  RequestValidationError,
+} = require("@hosnibounechada/library-common/errors");
 
 const requestValidator = (req, _, next) => {
   const errors = validationResult(req);

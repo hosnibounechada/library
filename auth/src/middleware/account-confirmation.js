@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
-const { NotAuthorizedError, NotAuthenticatedError } = require("../errors");
+const {
+  NotAuthorizedError,
+  NotAuthenticatedError,
+} = require("@hosnibounechada/library-common/errors");
 const { tokens } = require("../constants/tokens");
 
 const confirmationMiddleware = (req, _, next) => {
