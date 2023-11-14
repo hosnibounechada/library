@@ -17,6 +17,7 @@ const emptyUsersTable = async () => {
 
 beforeAll(async () => {
   await sequelize.sync();
+  await emptyUsersTable();
 });
 
 afterAll(async () => {
